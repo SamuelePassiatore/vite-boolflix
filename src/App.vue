@@ -18,7 +18,12 @@ export default {
         .then(res => {
           store.movies = res.data.results
         }).catch(error => { console.log(error) })
-    }
+    },
+
+    clearInput() {
+      this.searchTerm = '';
+    },
+
   },
 
 }
@@ -29,14 +34,16 @@ export default {
   <font-awesome-icon icon="fa-solid fa-star" />
   <div class="container">
     <div>
-      <input v-model.trim="this.searchTerm" @keyup.enter="onTypeChange" type="text" placeholder="Inserisci un titolo">
+      <input v-model.trim="this.searchTerm" @keyup.enter="onTypeChange" @keyup.esc="clearInput" type="text"
+        placeholder="Inserisci un titolo">
       <button @click="onTypeChange" class="btn btn-primary">Cerca</button>
     </div>
 
     <ul class="list-group" v-for="movie in store.movies" @key="movies.id">
       <li class="list-group-item">Titolo: {{ movie.title }}</li>
       <li class="list-group-item">Titolo Originale: {{ movie.original_title }}</li>
-      <li class="list-group-item">Lingua: {{ movie.original_language }}</li>
+      <li class="list-group-item">Lingua: <img class="img-fluid flag"
+          :src="`/src/assets/img/${movie.original_language}.png`"></li>
       <li class="list-group-item">Voto: {{ movie.vote_average }}</li>
     </ul>
   </div>
