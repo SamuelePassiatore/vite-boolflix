@@ -12,12 +12,15 @@ export default {
     }
   },
   methods: {
-
-    onTypeChange() {
-      axios.get(this.apiUri + `${this.searchTerm}`)
-        .then(res => {
+    fetchMovie(url) {
+      axios.get(url)
+        .then((res) => {
           store.movies = res.data.results
         }).catch(error => { console.log(error) })
+    },
+    onTypeSearch() {
+      const apiUri = this.apiUri + `${this.searchTerm}`
+      this.fetchMovie(apiUri)
     },
 
     clearInput() {
@@ -34,9 +37,9 @@ export default {
   <font-awesome-icon icon="fa-solid fa-star" />
   <div class="container">
     <div>
-      <input v-model.trim="this.searchTerm" @keyup.enter="onTypeChange" @keyup.esc="clearInput" type="text"
+      <input v-model.trim="this.searchTerm" @keyup.enter="onTypeSearch" @keyup.esc="clearInput" type="text"
         placeholder="Inserisci un titolo">
-      <button @click="onTypeChange" class="btn btn-primary">Cerca</button>
+      <button @click="onTypeSearch" class="btn btn-primary">Cerca</button>
     </div>
 
     <ul class="list-group" v-for="movie in store.movies" @key="movies.id">
