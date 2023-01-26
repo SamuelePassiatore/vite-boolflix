@@ -6,7 +6,8 @@ export default {
   data() {
     return {
       apiKey: 'api_key=4f01516c5f5e36c277e6c94fe530bbe4',
-      apiUri: `https://api.themoviedb.org/3/search/movie?api_key=4f01516c5f5e36c277e6c94fe530bbe4&query=`,
+      apiUriMovie: `https://api.themoviedb.org/3/search/movie?api_key=4f01516c5f5e36c277e6c94fe530bbe4&query=`,
+      apiUriSeries: `https://api.themoviedb.org/3/search/tv?api_key=4f01516c5f5e36c277e6c94fe530bbe4&query=`,
       store,
       searchTerm: ''
     }
@@ -24,20 +25,30 @@ export default {
         }).catch(error => { console.log(error) })
     },
 
-    fetchMovie(url) {
+    fetchSeries(url) {
       axios.get(url)
         .then((res) => {
-          store.movies = res.data.results
+          store.series = res.data.results
         }).catch(error => { console.log(error) })
     },
 
     onTypeSearch() {
-      const apiUri = this.apiUri + `${this.searchTerm}`
-      this.fetchMovie(apiUri)
+      const apiUriMovie = this.apiUriMovie + `${this.searchTerm}`;
+      this.fetchMovie(apiUriMovie);
+
+      const apiUriSeries = this.apiUriSeries + `${this.searchTerm}`;
+      this.fetchSeries(apiUriSeries);
     },
 
     clearInput() {
       this.searchTerm = '';
+    },
+
+    cleanInput() {
+      if (this.searchTerm === '') {
+        store.movies = []
+        store.series = []
+      }
     },
 
   },
@@ -55,13 +66,27 @@ export default {
       <button @click="onTypeSearch" class="btn btn-primary">Cerca</button>
     </div>
 
-    <ul class="list-group" v-for="movie in store.movies" @key="movies.id">
-      <li class="list-group-item">Titolo: {{ movie.title }}</li>
-      <li class="list-group-item">Titolo Originale: {{ movie.original_title }}</li>
-      <li class="list-group-item">Lingua: <img class="img-fluid flag" :src="getImagePath(movie.original_language)"
-          :alt="movie.original_language"></li>
-      <li class="list-group-item">Voto: {{ movie.vote_average }}</li>
-    </ul>
+    <div class="movies">
+      <h1>Film</h1>
+      <ul class="list-group" v-for="movie in store.movies" @key="movies.id">
+        <li class="list-group-item">Titolo: {{ movie.title }}</li>
+        <li class="list-group-item">Titolo Originale: {{ movie.original_title }}</li>
+        <li class="list-group-item">Lingua: <img class="img-fluid flag" :src="getImagePath(movie.original_language)"
+            :alt="movie.title"></li>
+        <li class="list-group-item">Voto: {{ movie.vote_average }}</li>
+      </ul>
+    </div>
+
+    <div class="series">
+      <h1>Serie TV</h1>
+      <ul class="list-group" v-for="serie in store.series" @key="series.id">
+        <li class="list-group-item">Titolo: {{ serie.name }}</li>
+        <li class="list-group-item">Titolo Originale: {{ serie.original_name }}</li>
+        <li class="list-group-item">Lingua: <img class="img-fluid flag" :src="getImagePath(serie.original_language)"
+            :alt="serie.name"></li>
+        <li class="list-group-item">Voto: {{ serie.vote_average }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
