@@ -12,12 +12,25 @@ export default {
     }
   },
   methods: {
+    getImagePath(image) {
+      const url = new URL(`./assets/img/${image}.png`, import.meta.url);
+      return url.href
+    },
+
     fetchMovie(url) {
       axios.get(url)
         .then((res) => {
           store.movies = res.data.results
         }).catch(error => { console.log(error) })
     },
+
+    fetchMovie(url) {
+      axios.get(url)
+        .then((res) => {
+          store.movies = res.data.results
+        }).catch(error => { console.log(error) })
+    },
+
     onTypeSearch() {
       const apiUri = this.apiUri + `${this.searchTerm}`
       this.fetchMovie(apiUri)
@@ -36,17 +49,17 @@ export default {
 <template>
   <font-awesome-icon icon="fa-solid fa-star" />
   <div class="container">
-    <div>
+    <div class="input-group">
       <input v-model.trim="this.searchTerm" @keyup.enter="onTypeSearch" @keyup.esc="clearInput" type="text"
-        placeholder="Inserisci un titolo">
+        placeholder="Inserisci un titolo" class="form-control">
       <button @click="onTypeSearch" class="btn btn-primary">Cerca</button>
     </div>
 
     <ul class="list-group" v-for="movie in store.movies" @key="movies.id">
       <li class="list-group-item">Titolo: {{ movie.title }}</li>
       <li class="list-group-item">Titolo Originale: {{ movie.original_title }}</li>
-      <li class="list-group-item">Lingua: <img class="img-fluid flag"
-          :src="`/src/assets/img/${movie.original_language}.png`"></li>
+      <li class="list-group-item">Lingua: <img class="img-fluid flag" :src="getImagePath(movie.original_language)"
+          :alt="movie.original_language"></li>
       <li class="list-group-item">Voto: {{ movie.vote_average }}</li>
     </ul>
   </div>
