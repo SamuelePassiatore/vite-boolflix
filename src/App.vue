@@ -34,7 +34,9 @@ export default {
       const apiUriSeries = this.apiUriSeries + `${searchTerm}`;
       this.searchSeries(apiUriSeries);
     },
-
+    clearInput() {
+      this.searchTerm = '';
+    }
   }
 }
 </script>
@@ -43,11 +45,11 @@ export default {
 <template>
   <!-- <font-awesome-icon icon="fa-solid fa-star" />
   <div class="container"> -->
-  <app-header @search-term="onTypeSearch"></app-header>
+  <app-header @search-term="onTypeSearch" @clear-input="clearInput"></app-header>
   <app-main></app-main>
 
   <!-- </div> -->
 </template>
-<style lang="scss" scoped>
-@use './assets/scss/style.scss'
+<style lang="scss">
+
 </style>
