@@ -44,13 +44,6 @@ export default {
       this.searchTerm = '';
     },
 
-    cleanInput() {
-      if (this.searchTerm === '') {
-        store.movies = []
-        store.series = []
-      }
-    },
-
   },
 
 }
@@ -63,7 +56,7 @@ export default {
     <div class="input-group">
       <input v-model.trim="this.searchTerm" @keyup.enter="onTypeSearch" @keyup.esc="clearInput" type="text"
         placeholder="Inserisci un titolo" class="form-control">
-      <button @click="onTypeSearch" class="btn btn-primary">Cerca</button>
+      <button @click="onTypeSearch" :class="{ disabled: !this.searchTerm }" class="btn btn-primary">Cerca</button>
     </div>
 
     <div class="movies">
