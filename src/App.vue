@@ -44,6 +44,7 @@ export default {
       this.searchTerm = '';
     },
 
+
   },
 
 }
@@ -62,6 +63,9 @@ export default {
     <div class="movies">
       <h1>Film</h1>
       <ul class="list-group" v-for="movie in store.movies" @key="movies.id">
+        <li class="list-group-item"><img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`"
+            :alt="movie.title" class="img-fluid">
+        </li>
         <li class="list-group-item">Titolo: {{ movie.title }}</li>
         <li class="list-group-item">Titolo Originale: {{ movie.original_title }}</li>
         <li class="list-group-item">Lingua: <img class="img-fluid flag" :src="getImagePath(movie.original_language)"
@@ -73,6 +77,9 @@ export default {
     <div class="series">
       <h1>Serie TV</h1>
       <ul class="list-group" v-for="serie in store.series" @key="series.id">
+        <li class="list-group-item"><img :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`" :alt="serie.name"
+            class="img-fluid">
+        </li>
         <li class="list-group-item">Titolo: {{ serie.name }}</li>
         <li class="list-group-item">Titolo Originale: {{ serie.original_name }}</li>
         <li class="list-group-item">Lingua: <img class="img-fluid flag" :src="getImagePath(serie.original_language)"
