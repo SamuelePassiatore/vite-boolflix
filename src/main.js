@@ -7,6 +7,4 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 library.add(faStar);
 
 import App from './App.vue'
-const app = createApp(App);
-app.component('font-awesome-icon', FontAwesomeIcon);
-app.mount('#app')
+createApp(App).mount('#app')
