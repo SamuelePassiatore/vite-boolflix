@@ -30,33 +30,42 @@ export default {
             return star
         },
     }
-
-
 }
 
 </script>
 
 <template>
-
-    <figure>
-        <img :src="`https://image.tmdb.org/t/p/w342/${production.poster_path}`" :alt="production.title"
-            class="img-fluid w-25">
-    </figure>
-    <div> {{ production.title || production.name }}</div>
-    <div> {{ production.original_title || production.original_name }}</div>
-    <figure>
-        <img class="img-fluid flag" :src="`/src/assets/img/${production.original_language}.png`"
-            :alt="production.original_language">
-    </figure>
-
-    <div>
-        <span>Voto:</span>
-        <span class="text-warning" v-html="fromVoteToStar(production.vote_average)"></span>
+    <div class="col-3">
+        <img v-if="production.poster_path" :src="`https://image.tmdb.org/t/p/w342/${production.poster_path}`"
+            :alt="production.poster_path" class="img-fluid rounded-2 poster w-100">
+        <div v-else class="poster img-fluid w-100 fw-bold text-center rounded-2 bg-warning">
+            {{ production.title || production.name }}
+        </div>
     </div>
+    <div class="d-none">
+        <div> {{ production.title || production.name }}</div>
+        <div> {{ production.original_title || production.original_name }}</div>
+        <figure>
+            <img class="img-fluid flag" :src="`/src/assets/img/${production.original_language}.png`"
+                :alt="production.original_language">
+        </figure>
+        <div>
+            <span>Voto:</span>
+            <span class="text-warning" v-html="fromVoteToStar(production.vote_average)"></span>
+        </div>
+        <div>
+            <span>Overview:</span>
+            <p> {{ production.overview }}</p>
+        </div>
+    </div>
+
 
 
 </template>
 
 <style lang="scss" scoped>
-@use '../assets/scss/style.scss'
+.poster {
+    line-height: 400.5px;
+    height: 425px;
+}
 </style>
