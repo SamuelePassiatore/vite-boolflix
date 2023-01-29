@@ -9,15 +9,16 @@ export default {
     },
     props: {
         // Movie
-        poster_path: String,
-        title: String,
-        original_title: String,
-        original_language: String,
-        vote_average: Number,
+        // poster_path: String,
+        // title: String,
+        // original_title: String,
+        // original_language: String,
+        // vote_average: Number,
 
         // Series
-        name: String,
-        original_name: String,
+        // name: String,
+        // original_name: String,
+        production: Object
     },
     methods: {
         fromVoteToStar(vote) {
@@ -38,17 +39,19 @@ export default {
 <template>
 
     <figure>
-        <img :src="`https://image.tmdb.org/t/p/w342/${poster_path}`" :alt="title" class="img-fluid w-25">
+        <img :src="`https://image.tmdb.org/t/p/w342/${production.poster_path}`" :alt="production.title"
+            class="img-fluid w-25">
     </figure>
-    <div> {{ title || name}}</div>
-    <div> {{ original_title || original_name }}</div>
+    <div> {{ production.title || production.name }}</div>
+    <div> {{ production.original_title || production.original_name }}</div>
     <figure>
-        <img class="img-fluid flag" :src="`/src/assets/img/${original_language}.png`" :alt="original_language">
+        <img class="img-fluid flag" :src="`/src/assets/img/${production.original_language}.png`"
+            :alt="production.original_language">
     </figure>
 
     <div>
         <span>Voto:</span>
-        <span v-html="fromVoteToStar(vote_average)"></span>
+        <span class="text-warning" v-html="fromVoteToStar(production.vote_average)"></span>
     </div>
 
 
