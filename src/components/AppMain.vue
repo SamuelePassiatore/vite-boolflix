@@ -28,14 +28,14 @@ export default {
     <main class="d-flex py-4">
         <section class="container" v-if="store.movies.length > 0 || store.series.length > 0">
             <div class="movies">
-                <h1 v-if="store.movies.length > 0" class="text-white pb-1">Film</h1>
+                <h1 v-if="store.movies.length > 0" class="text-white pb-1">Movies</h1>
                 <div class="row gy-4">
                     <production-card v-for="movie in store.movies" :key="movie.id"
                         :production="movie"></production-card>
                 </div>
             </div>
             <div class="series pt-4">
-                <h1 v-if="store.series.length > 0" class="text-white pb-1">Serie TV</h1>
+                <h1 v-if="store.series.length > 0" class="text-white pb-1">TV Series</h1>
                 <div class="row gy-4">
                     <production-card v-for="serie in store.series" :key="serie.id"
                         :production="serie"></production-card>

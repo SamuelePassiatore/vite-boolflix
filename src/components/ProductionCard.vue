@@ -44,15 +44,26 @@ export default {
                 {{ production.title || production.name || production.original_title || production.original_name }}
             </div>
         </div>
-        <div v-if="showDetails" class="card-back rounded-2 bg-black">
-            <div>{{ production.title || production.name }}</div>
-            <div>{{ production.original_title || production.original_name }}</div>
-            <figure>
+        <div v-if="showDetails" class="card-back rounded-2 bg-black text-white text-center p-3">
+            <h3>{{ production.title || production.name }}</h3>
+            <h5 class="pb-2">{{ production.original_title || production.original_name }}</h5>
+            <div class="pb-2">
+                <span class="pe-2">Year:</span>
+                <span>
+                    {{
+                        new Date(production.release_date).getFullYear() ||
+                            new Date(production.first_air_date).getFullYear() ||
+                            production.release_date || production.first_air_date
+                    }}
+                </span>
+            </div>
+            <figure class="mb-0 pb-1">
+                <span class="pe-2">Language:</span>
                 <img class="img-fluid flag" :src="`/src/assets/img/${production.original_language}.png`"
                     :alt="production.original_language">
             </figure>
-            <div class="text-warning" v-html="fromVoteToStar(production.vote_average)"></div>
-            <div>
+            <div class="text-warning fs-4 p-0 pb-1 stars" v-html="fromVoteToStar(production.vote_average)"></div>
+            <div class="pt-2">
                 <span>Overview:</span>
                 <p> {{ production.overview }}</p>
             </div>
@@ -70,7 +81,7 @@ export default {
 }
 
 .flag {
-    height: 20px;
+    height: 30px;
 }
 
 
@@ -78,5 +89,14 @@ export default {
     height: 425px;
     overflow-y: auto;
     border: 1px solid white;
+    cursor: pointer;
+
+    h5 {
+        border-bottom: 1px solid white;
+    }
+}
+
+.stars {
+    border-bottom: 1px solid white;
 }
 </style>
