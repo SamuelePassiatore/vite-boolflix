@@ -10,21 +10,20 @@ export default {
     },
     emits: ['search-term', 'toggle-start-page'],
     methods: {
+        // Input cleaning
         clearInput() {
             this.searchTerm = '';
         }
     }
-
-
-
 }
-
 </script>
 
 <template>
     <header>
         <section class="container d-flex align-items-center h-100">
+            <!-- Title -->
             <h1 @click="$emit('toggle-start-page')" class="text-white">BOOLFLIX</h1>
+            <!-- Input & button -->
             <div class="input-group d-flex justify-content-end">
                 <input v-model.trim="searchTerm" @keyup.enter="$emit('search-term', searchTerm)" @keyup.esc="clearInput"
                     type="text" placeholder="Enter a title">
