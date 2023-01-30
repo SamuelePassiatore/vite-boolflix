@@ -43,14 +43,19 @@ export default {
     },
     clearInput() {
       this.searchTerm = '';
+    },
+    handleToggleStartPage() {
+      window.location.reload();
     }
+
   }
 }
 </script>
 
 
 <template>
-  <app-header @search-term="onTypeSearch" @clear-input="clearInput"></app-header>
+  <app-header @search-term="onTypeSearch" @clear-input="clearInput" @toggle-start-page="handleToggleStartPage">
+  </app-header>
   <app-main></app-main>
 </template>
 <style lang="scss">
