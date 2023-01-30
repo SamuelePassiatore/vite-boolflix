@@ -6,25 +6,15 @@ export default {
     data() {
         return {
             store,
-            // showStartPage: true
         }
     },
-    components: { ProductionCard },
-    // emits: ['toggle-start-page'],
-    // methods: {
-    //     toggleStartPage() {
-    //         this.showStartPage = !this.showStartPage;
-    //     }
+    components: { ProductionCard }
 }
 
 
 </script>
 
 <template>
-    <!-- <div v-if="showStartPage"> -->
-    <!-- <h1 class="bg-secondary">Prova a cercare un film o una serie tv!</h1> -->
-
-    <!-- <div v-else> -->
     <main class="d-flex py-4">
         <section class="container" v-if="store.movies.length > 0 || store.series.length > 0">
             <div class="movies">
@@ -34,7 +24,7 @@ export default {
                         :production="movie"></production-card>
                 </div>
             </div>
-            <div class="series pt-4">
+            <div class="series pt-5">
                 <h1 v-if="store.series.length > 0" class="text-white pb-1">TV Series</h1>
                 <div class="row gy-4">
                     <production-card v-for="serie in store.series" :key="serie.id"
@@ -43,11 +33,9 @@ export default {
             </div>
         </section>
         <div v-else class="text-white d-flex justify-content-center align-items-center w-100">
-            <h1 id="home">Prova a cercare un film o una serie TV!</h1>
+            <h1 id="home">Try searching for a movie or TV series!</h1>
         </div>
     </main>
-
-
 </template>
 
 <style lang="scss" scoped>

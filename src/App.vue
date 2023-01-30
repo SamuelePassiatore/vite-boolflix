@@ -43,11 +43,8 @@ export default {
 
 
 <template>
-
   <app-header @search-term="onTypeSearch" @clear-input="clearInput"></app-header>
   <app-main></app-main>
-
-  <!-- </div> -->
 </template>
 <style lang="scss">
 @use './assets/scss/style.scss';

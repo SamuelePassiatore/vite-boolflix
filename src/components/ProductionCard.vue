@@ -45,9 +45,14 @@ export default {
             </div>
         </div>
         <div v-if="showDetails" class="card-back rounded-2 bg-black text-white text-center p-3">
-            <h3>{{ production.title || production.name }}</h3>
-            <h5 class="pb-2">{{ production.original_title || production.original_name }}</h5>
-            <div class="pb-2">
+            <div class="titles pb-1">
+                <h3>{{ production.title || production.name }}</h3>
+                <h5
+                    v-if="(production.original_title !== production.title) || (production.original_name !== production.name)">
+                    {{ production.original_title || production.original_name }}
+                </h5>
+            </div>
+            <div class="pb-2 pt-1">
                 <span class="pe-2">Year:</span>
                 <span>
                     {{
@@ -84,19 +89,18 @@ export default {
     height: 30px;
 }
 
-
 .card-back {
     height: 425px;
     overflow-y: auto;
-    border: 1px solid white;
+    box-shadow: 0 0 6px 5px rgba(red, 0.8);
     cursor: pointer;
 
-    h5 {
+    .titles {
         border-bottom: 1px solid white;
     }
-}
 
-.stars {
-    border-bottom: 1px solid white;
+    .stars {
+        border-bottom: 1px solid white;
+    }
 }
 </style>

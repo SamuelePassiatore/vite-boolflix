@@ -12,10 +12,7 @@ export default {
     methods: {
         clearInput() {
             this.searchTerm = '';
-        },
-        // toggle() {
-        //     this.$emit('toggle-start-page');
-        // }
+        }
     }
 
 
@@ -30,9 +27,10 @@ export default {
             <h1 class="text-white">BOOLFLIX</h1>
             <div class="input-group d-flex justify-content-end">
                 <input v-model.trim="searchTerm" @keyup.enter="$emit('search-term', searchTerm)" @keyup.esc="clearInput"
-                    type="text" placeholder="Inserisci un titolo">
+                    type="text" placeholder="Enter a title">
                 <button @click="$emit('search-term', searchTerm)" :class="{ disabled: !searchTerm }"
-                    class="btn button-custom-red text-white">Cerca</button>
+                    class="btn button-custom-red text-white">Search
+                </button>
             </div>
         </section>
     </header>
