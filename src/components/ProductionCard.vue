@@ -21,16 +21,18 @@ export default {
         // original_name: String,
         production: Object
     },
+    computed: {
+        vote() {
+            return Math.ceil(this.production.vote_average / 2);
+        }
+    },
     methods: {
-        fromVoteToStar(vote) {
-            const transformedVote = (Math.ceil(vote) / 2);
-            let star = ``
-            for (let i = 0; i < 5; i++) {
-                (i < transformedVote) ? star += `&#9733;` : star += `&#9734;`;
-            }
-            return star
-        },
-    }
+        setStar(n) {
+            let star = n <= this.vote ? 'fa-solid' : 'fa-regular';
+            return star + ' fa-star';
+        }
+
+    },
 }
 
 </script>
@@ -67,15 +69,16 @@ export default {
                 <img class="img-fluid flag" :src="`/src/assets/img/${production.original_language}.png`"
                     :alt="production.original_language">
             </figure>
-            <div class="text-warning fs-4 p-0 pb-1 stars" v-html="fromVoteToStar(production.vote_average)"></div>
-            <div class="pt-2">
+            <div>
+                <font-awesome-icon v-for="n in 5" :icon="setStar(n)" class="text-warning fs-5 p-0 py-2 stars ">
+                </font-awesome-icon>
+            </div>
+            <div class="pt-1">
                 <span>Overview:</span>
                 <p> {{ production.overview }}</p>
             </div>
         </div>
     </div>
-
-
 </template>
 
 <style lang="scss" scoped>

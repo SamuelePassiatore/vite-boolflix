@@ -46,6 +46,10 @@ header {
     left: 0;
     bottom: 0;
 
+    h1 {
+        cursor: pointer;
+    }
+
     .button-custom-red {
         background-color: red;
     }

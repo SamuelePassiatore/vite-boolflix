@@ -15,7 +15,12 @@ export default {
 </script>
 
 <template>
-    <main class="d-flex py-4">
+    <div v-if="store.isLoading" class="loader">
+        <div class="spinner-border text-secondary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <main v-else class="d-flex py-4">
         <section class="container" v-if="store.movies.length > 0 || store.series.length > 0">
             <div class="movies">
                 <h1 v-if="store.movies.length > 0" class="text-white pb-1">Movies</h1>
@@ -43,5 +48,15 @@ main {
     min-height: calc(100vh - 100px);
     overflow-y: auto;
     background-color: #434343;
+}
+
+.loader {
+    background-color: #434343;
+    min-height: calc(100vh - 100px);
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

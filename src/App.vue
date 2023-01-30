@@ -15,18 +15,25 @@ export default {
     }
   },
   methods: {
-
     searchMovie(url) {
+      store.isLoading = true;
       axios.get(url)
         .then((res) => {
           store.movies = res.data.results
         }).catch(error => { console.log(error) })
+        .then(() => {
+          store.isLoading = false;
+        });
     },
     searchSeries(url) {
+      store.isLoading = true;
       axios.get(url)
         .then((res) => {
           store.series = res.data.results
         }).catch(error => { console.log(error) })
+        .then(() => {
+          store.isLoading = false;
+        });
     },
     onTypeSearch(searchTerm) {
       const apiUriMovie = this.apiUriMovie + `${searchTerm}`;
